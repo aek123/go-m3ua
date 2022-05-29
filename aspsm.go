@@ -49,7 +49,7 @@ func (c *Conn) handleAspUpAck(aspUpAck *messages.AspUpAck) error {
 
 func (c *Conn) handleAspDown(aspDown *messages.AspDown) error {
 	switch c.state {
-	case StateAspInactive, StateAspActive:
+	case StateAspActive:
 		return NewErrUnexpectedMessage(aspDown)
 	}
 	if c.sctpInfo.Stream != 0 {
@@ -67,7 +67,7 @@ func (c *Conn) handleAspDown(aspDown *messages.AspDown) error {
 
 func (c *Conn) handleAspDownAck(aspDownAck *messages.AspDownAck) error {
 	switch c.state {
-	case StateAspInactive, StateAspActive:
+	case StateAspActive:
 		return NewErrUnexpectedMessage(aspDownAck)
 	}
 	if c.sctpInfo.Stream != 0 {
